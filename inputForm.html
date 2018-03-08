@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+        <title>PacePrint</title>
+    </head>
+<body style="background-color: aquamarine; color: black; text-align: center;">
+    <h1> Add your self to the <em>Pace Print System</em></h1>
+<form method="post">
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="firstname">
+    </p>
+    <p>
+        <label for="lastName">Last name</label>
+        <input type="text" name="lastName" id="lastname">
+    </p>
+    <p>
+        <label for="paceEmail">Pace Email:</label>
+        <input type="text" name="paceEmail" id="paceemail">
+    </p>
+    <p>
+        <label for="accountBalance">Your current account balance:</label>
+        <input type="text" name="accountBalance" id="accountbalance">
+    </p>
+
+
+<input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+
+<p >Click the "Submit" button and your pace print account will be added to the system.</p>
+    
+    <p id="submitted"></p>
+    
+
+
+
+<script>
+    function addtoDB()  {
+       document.getElementById("submitted").innerHTML = "COOL";
+        console.log("add DB method called");
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()   {
+            console.log("The ready state is: "+this.readyState + " The status is "+ this.status);
+                if (this.readyState == '4' && this.status == '200'){
+                console.log("Ready stae!");
+                    document.getElementById("submitted").innerHTML = "FORM SUBMITTED"; 
+                    
+        }
+        };
+     var FIRSTNAME = document.getElementById('firstname').value;
+     var LASTNAME = document.getElementById("lastname").value;
+     var PACEMAIL = document.getElementById("paceemail").value;
+     var ACCBALANCE = document.getElementById("accountbalance").value;
+        
+        var queryString = "?firstName=" + FIRSTNAME +"&lastName=" +LASTNAME+ "&paceEmail="+PACEMAIL+"&accountBalance="+ACCBALANCE;
+        console.log(queryString);
+        xhttp.open("GET", "update.php"+queryString, true);
+        xhttp.send(null);
+    
+        
+    }
+    
+    </script>
+    
+    
+</body>
+</html>
+
